@@ -1,0 +1,37 @@
+{
+  "name": "calendar-agenti",
+  "version": "1.0.0",
+  "description": "Sistem de programari pentru agenti",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "start:local": "node ./node_modules/react-scripts/bin/react-scripts.js start",
+    "start:npx": "npx react-scripts start"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "firebase": "^10.6.0",
+    "react-router-dom": "^6.20.0",
+    "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "react-scripts": "5.0.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+} 

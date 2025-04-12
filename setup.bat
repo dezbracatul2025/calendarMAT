@@ -1,0 +1,6 @@
+@echo off
+echo Instalare dependente...
+call npm install --force
+echo.
+echo Pornire aplicatie...
+call npm start 
