@@ -31,7 +31,7 @@ function TeamBuildingWidget() {
   const [isExpanded, setIsExpanded] = useState(false);
   // const [selectedAgentForAdd, setSelectedAgentForAdd] = useState(null); // Removed
 
-  // Effect to calculate sorted list, top 3, and max amount when contributions (from context) change
+  // Effect to calculate sorted list, top 3, and max amount when contributions (from context) changea
   useEffect(() => {
     if (Object.keys(contributions).length === 0 && !isLoadingContext) return;
     if (isLoadingContext) return; // Don't process if context is still loading
