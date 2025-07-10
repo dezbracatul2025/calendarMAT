@@ -5,14 +5,16 @@ import { getAnalytics } from 'firebase/analytics';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBnlkGJvtqXOuFbSs8yZ97Ae3I_J6eeX8U",
-  authDomain: "calendarweb-programari.firebaseapp.com",
-  projectId: "calendarweb-programari",
-  storageBucket: "calendarweb-programari.firebasestorage.app",
-  messagingSenderId: "353509269021",
-  appId: "1:353509269021:web:ce22221860024efc6730f4",
-  measurementId: "G-EPPTF8N9HQ"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY || "AIzaSyBnlkGJvtqXOuFbSs8yZ97Ae3I_J6eeX8U",
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN || "calendarweb-programari.firebaseapp.com",
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID || "calendarweb-programari",
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET || "calendarweb-programari.firebasestorage.app",
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID || "353509269021",
+  appId: process.env.REACT_APP_FIREBASE_APP_ID || "1:353509269021:web:ce22221860024efc6730f4",
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID || "G-EPPTF8N9HQ"
 };
+
+console.log("Firebase config:", firebaseConfig);
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
