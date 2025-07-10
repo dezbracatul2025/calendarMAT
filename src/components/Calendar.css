@@ -3,8 +3,9 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-  background-color: #f0f2f5;
+  background-color: #f8f9fa;
   font-family: 'Roboto', sans-serif;
+  color: #333;
 }
 
 /* Header */
@@ -12,29 +13,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: #2a4d69;
-  color: white;
-  border-bottom: 1px solid #1c3144;
+  padding: 1.2rem 2rem;
+  background-color: #202020; /* Changed background to very dark grey */
+  color: #DDA768;
+  border-bottom: 1px solid #333; /* Consider changing border color too? e.g., #111 */
 }
 
 .calendar-header h1 {
   margin: 0;
-  font-size: 1.8rem;
-  font-weight: bold;
+  font-size: 1.7rem;
+  font-weight: 500;
 }
 
 .current-time {
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: #DDA768;
 }
 
 /* Team counts */
 .team-counts {
   display: flex;
-  background-color: #ddd;
-  padding: 0.5rem;
-  border-bottom: 1px solid #ccc;
+  background-color: #ffffff;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid #dee2e6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .team-count-item {
@@ -42,8 +45,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   padding: 0.5rem;
-  border-right: 1px solid #ccc;
+  border-right: 1px solid #e9ecef;
 }
 
 .team-count-item:last-child {
@@ -51,92 +55,159 @@
 }
 
 .team-name {
-  font-weight: bold;
-  font-size: 1.1rem;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #495057;
+  margin-bottom: 0.25rem;
 }
 
 .team-count {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: bold;
+  color: #212529;
 }
+
+/* --- Calendar Selector Styles --- */
+.calendar-selector {
+  display: flex;
+  justify-content: center; /* Center buttons */
+  padding: 0.9rem 1rem; /* Increased vertical padding */
+  /* background-color: #d9d9d9; */ /* Changed background to #d9d9d9 */
+  background: linear-gradient(to bottom, #e5e5e5, #d9d9d9); /* Subtle gradient */
+  border-bottom: 1px solid #cccccc; /* Adjusted border color */
+  gap: 0.5rem; /* Space between buttons */
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05); /* Added subtle inset shadow */
+}
+
+.selector-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb; /* Added subtle border to inactive buttons */
+  border-radius: 4px;
+  background-color: #ffffff; /* White background */
+  color: #495057; /* Grey text */
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Added subtle shadow */
+}
+
+.selector-button:hover {
+  background-color: #f9fafb; /* Slightly grey background on hover */
+  border-color: #d1d5db; /* Darker border on hover */
+  /* Removed transform/shadow changes from previous hover state */
+}
+
+.selector-button.active {
+  background-color: #2a4d69; /* Use the login button blue */
+  color: white;
+  border-color: #2a4d69; /* Match border to background */
+  box-shadow: none; /* Remove shadow when active */
+  transform: none; /* Reset transform when active */
+}
+/* --- End Selector Styles --- */
 
 /* Calendar content */
 .calendar-content {
   flex: 1;
   overflow-y: auto;
-  padding: 1rem;
+  padding: 1.5rem;
+  background-color: #d9d9d9; /* Changed background to #d9d9d9 */
 }
 
 .team-calendar {
   margin-bottom: 2rem;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  background-color: transparent; /* Make background transparent */
+  border-radius: 6px; /* Keep radius if needed for consistency, or remove */
+  /* box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08); */ /* Removed shadow */
+  /* border: 1px solid #e9ecef; */ /* Removed border */
 }
 
 .team-title {
   margin: 0;
-  padding: 1rem;
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #ddd;
-  font-size: 1.3rem;
+  padding: 0.9rem 1.2rem;
+  background-color: #d9d9d9; /* Changed background to #d9d9d9 */
+  /* border-bottom: 1px solid #dee2e6; */ /* Removed border */
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #495057;
 }
 
 .week-container {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem; /* Added margin for space between weeks */
 }
 
 .days-container {
   display: flex;
+  gap: 1.5rem; /* Increased gap between day columns */
+  background-color: #d9d9d9; /* Changed background to #d9d9d9 */
 }
 
 .day-column {
   flex: 1;
-  border-right: 1px solid #eee;
-}
-
-.day-column:last-child {
-  border-right: none;
+  border: 1px solid #e0e0e0; 
+  border-radius: 20px; /* Increased border-radius */
+  overflow: hidden; 
+  background-color: #ffffff; 
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06); /* Adjusted subtle shadow */
 }
 
 .day-header {
-  padding: 0.5rem;
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #ddd;
+  padding: 1rem 0.5rem; /* Increased vertical padding */
+  background-color: #ffffff; 
+  border-bottom: 1px solid #e5e7eb; /* Changed to subtle light grey border */
   text-align: center;
-  font-weight: bold;
-  font-size: 0.9rem;
+  font-weight: 500; /* Reduced font-weight */
+  font-size: 0.9rem; 
+  color: #333; 
 }
 
 .time-slot {
-  height: 40px;
+  height: 60px; /* Increased height */
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid #eee;
+  border-top: 1px solid #f1f3f5;
+  border-bottom: none;
   cursor: pointer;
   text-align: center;
-  font-size: 0.9rem;
-  transition: background-color 0.2s;
+  font-size: 1rem; /* Increased font size for available slots */
+  transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, transform 0.15s ease-in-out;
+  position: relative; /* Ensure this is relative for absolute positioning inside */
+  color: #4b5563; /* Slightly darker grey for available time */
+  overflow: hidden; /* Prevent content spillover */
 }
 
-.time-slot:hover:not(.booked) {
-  background-color: #f9f9f9;
+.time-slot:first-of-type {
+  border-top: none;
+}
+
+.time-slot:not(.booked):not(.disabled-slot):not(.input-active):hover {
+  background-color: #e9ecef;
+  transform: scale(1.02); /* Slight scale up */
+  z-index: 2; /* Ensure it comes above neighbours */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .time-slot.booked {
   color: white;
   cursor: pointer;
+  font-weight: 500;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
 }
 
-.time-slot.own-appointment:hover {
-  opacity: 0.9;
+.time-slot.own-appointment:hover:not(.disabled-slot) {
+  opacity: 0.85;
 }
 
 .time-slot.disabled-slot {
   cursor: not-allowed;
-  opacity: 0.8;
+  opacity: 0.7;
+  background-color: #f8f9fa;
+}
+
+.time-slot.colleague-appointment {
+  cursor: not-allowed;
 }
 
 .appointment-info {
@@ -146,28 +217,31 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  font-weight: bold;
+  font-weight: 500;
+  line-height: 1.2;
 }
 
 .slot-time {
-  color: #555;
+  color: #6c757d;
+  font-size: 0.85rem;
 }
 
 /* Message */
 .message-container {
   position: fixed;
-  bottom: 20px;
+  bottom: 25px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
 }
 
 .message {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: #343a40;
   color: white;
-  padding: 0.8rem 1.5rem;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 0.9rem 1.6rem;
+  border-radius: 6px;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+  font-size: 0.95rem;
 }
 
 /* Popup */
@@ -177,7 +251,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -186,16 +260,19 @@
 
 .popup {
   background-color: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 2rem 2.5rem;
+  border-radius: 6px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
   text-align: center;
+  width: 90%;
+  max-width: 350px;
 }
 
 .popup p {
   margin-top: 0;
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.15rem;
+  margin-bottom: 1.8rem;
+  color: #333;
 }
 
 .popup-buttons {
@@ -204,39 +281,535 @@
   gap: 1rem;
 }
 
-.confirm-button, .cancel-button {
-  padding: 0.6rem 1.5rem;
+/* Consistent Button Styling */
+.confirm-button, .cancel-button, .logout-button {
+  padding: 0.7rem 1.5rem;
   border: none;
-  border-radius: 4px;
-  font-weight: bold;
+  border-radius: 5px;
+  font-weight: 500;
   cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  font-size: 0.95rem;
 }
 
 .confirm-button {
-  background-color: #e74c3c;
+  background-color: #dc3545;
   color: white;
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.4);
+}
+
+.confirm-button:hover {
+  background-color: #c82333;
+  box-shadow: 0 3px 6px rgba(220, 53, 69, 0.5);
+}
+
+.confirm-button:active {
+  transform: scale(0.96); /* Slightly more pronounced click effect */
 }
 
 .cancel-button {
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
   color: #333;
+  border: 1px solid #dee2e6;
+}
+
+.cancel-button:hover {
+  background-color: #e2e6ea;
+}
+
+.cancel-button:active {
+  transform: scale(0.96); /* Slightly more pronounced click effect */
 }
 
 /* Logout button */
 .logout-button {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 0.6rem 1.2rem;
-  background-color: #c0392b;
+  bottom: 25px;
+  right: 25px;
+  background-color: #6c757d;
   color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10; /* Ensure it stays above scaled time slots (which have z-index: 2) */
 }
 
 .logout-button:hover {
-  background-color: #a93226;
+  background-color: #5a6268;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px); /* Subtle lift */
+}
+
+.logout-button:active {
+  transform: scale(0.96); /* Slightly more pronounced click effect */
+}
+
+/* --- Agent de Serviciu View Styles -> Renamed to Diverse View Styles --- */
+
+/* Main container for the Diverse section */
+.diverse-view {
+  background-color: #f8f9fa; /* Light background for the whole section */
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Title for the Diverse section */
+.diverse-view h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #343a40; /* Darker title */
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid #dee2e6; /* Separator line */
+  padding-bottom: 0.75rem;
+}
+
+/* Area containing all widgets */
+.widget-area {
+  display: flex;
+  flex-wrap: wrap; /* Allow widgets to wrap on smaller screens */
+  gap: 1.5rem; /* Space between widgets */
+  align-items: flex-start; /* Align widgets to the top */
+}
+
+/* Base style for all widgets */
+.widget-container {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07); /* Standard shadow for widgets */
+  flex-grow: 1; /* Allow widgets to grow */
+  /* Default to taking full width if only one widget or on small screens */
+  flex-basis: 100%; 
+}
+
+/* Specific styles for the Agent de Serviciu widget */
+.agent-widget {
+  /* Positioning */
+  flex-basis: 400px; 
+  flex-grow: 0; 
+  text-align: center; 
+  /* New Background & Styling */
+  background-color: #a9c77e; /* Kiwi green background */
+  color: #333; /* Darker text for contrast */
+  border: 1px solid #8aae5f; /* Slightly darker border */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for hover */
+  border-radius: 50px;
+}
+
+.agent-widget:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.agent-widget h3 { 
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #444; /* Darker heading */
+  margin-top: 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1); /* Subtler border */
+  padding-bottom: 0.5rem;
+}
+
+.agent-widget .service-date {
+  font-size: 0.9rem; 
+  color: #555; /* Darker date color */
+  margin-bottom: 1.5rem; 
+}
+
+.agent-widget .agent-display {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  gap: 0.8rem; 
+  margin-bottom: 1rem; 
+}
+
+.agent-widget .agent-name {
+  display: inline-block;
+  background-color: #546e31; /* Darker, earthy green accent */
+  color: #ffffff; 
+  padding: 0.7rem 1.8rem; 
+  border-radius: 50px; 
+  font-size: 1.4rem; 
+  font-weight: 600;
+  min-width: 160px; 
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  border: none; 
+}
+
+/* ... restul stilurilor pentru .agent-widget (mesaje, etc) ... */
+.agent-widget .next-agent-info {
+  color: #666;
+}
+.agent-widget .success-message,
+.agent-widget .weekend-message {
+  color: #444;
+}
+.agent-widget .weekend-message {
+  color: #777;
+}
+
+.agent-widget .pause-message {
+  color: #e67e22; /* Orange color for pause message */
+  font-weight: 500;
+  text-align: center;
+  font-style: italic;
+}
+
+/* --- Pause Button Styles --- */
+.pause-control {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.pause-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pause-button.active {
+  background-color: #e74c3c; /* Red for pause */
+  color: white;
+}
+
+.pause-button.active:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.pause-button.paused {
+  background-color: #27ae60; /* Green for reactivate */
+  color: white;
+}
+
+.pause-button.paused:hover {
+  background-color: #229954;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.pause-button:active {
+  transform: scale(0.96);
+}
+
+/* --- Redesign Nav Buttons --- */
+.agent-widget .nav-button {
+   background: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
+   border: 1px solid rgba(0, 0, 0, 0.1); 
+   color: #546e31; /* Dark green icon color */
+   border-radius: 50%; 
+   width: 38px; /* Slightly larger */
+   height: 38px;
+   font-size: 1.6rem; /* Larger icon */
+   font-weight: lighter; /* Thinner icon lines if possible */
+   line-height: 1; 
+   cursor: pointer;
+   transition: all 0.2s ease; 
+   display: flex; 
+   align-items: center;
+   justify-content: center;
+   padding: 0; 
+   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+   text-shadow: 0 1px 1px rgba(255,255,255,0.1); /* Subtle text shadow */
+}
+
+.agent-widget .nav-button:hover {
+  background-color: rgba(255, 255, 255, 0.5); /* Lighter on hover */
+  color: #3d5122; /* Darker green on hover */
+  border-color: rgba(0, 0, 0, 0.2);
+  transform: scale(1.05); /* Slightly enlarge */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.agent-widget .nav-button:active {
+    transform: scale(0.98); /* Click effect */
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- End Diverse View Styles --- */
+
+/* Optional: Style for the main loading indicator */
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: #6c757d;
+}
+
+/* Responsive adjustments for smaller screens */
+/* Style modifications for the view selector on smaller screens */
+@media (max-width: 768px) { /* Target tablets and phones */
+  .calendar-content {
+    padding: 0.5rem; /* Further reduced padding on mobile */
+  }
+
+  .calendar-selector {
+    overflow-x: auto; 
+    white-space: nowrap; 
+    justify-content: flex-start; 
+    padding: 0.6rem 0.25rem; /* Adjusted mobile padding proportionally */
+    gap: 0.25rem; 
+    /* Gradient, shadow, border inherit from base */
+    /* Hide scrollbar standard */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  }
+
+  /* Hide scrollbar for WebKit browsers */
+  .calendar-selector::-webkit-scrollbar {
+    display: none; 
+  }
+
+  .selector-button {
+    flex-shrink: 0; 
+    padding: 0.3rem 0.6rem; /* Further reduced padding */
+    font-size: 0.8rem; /* Smaller font size for buttons */
+    /* Existing border/shadow from base style will apply */
+  }
+
+  .days-container {
+    /* Removed overflow-x, white-space, padding-bottom */
+    gap: 0.5rem; /* Reduced gap significantly */
+     /* Hide scrollbar standard - keep for safety? */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  }
+
+  /* Hide scrollbar for WebKit browsers */
+  .days-container::-webkit-scrollbar {
+      display: none; 
+  }
+
+  .day-column {
+    flex: 1 1 0px; /* Allow shrinking, take equal space */
+    min-width: 0; /* Remove minimum width to allow full shrinking */
+    border-radius: 10px; /* Reduced border-radius */
+  }
+
+  .day-header {
+    padding: 0.5rem 0.2rem; /* Reduced padding */
+    font-size: 0.75rem; /* Reduced font size */
+    font-weight: 500;
+  }
+
+  .time-slot {
+    height: 45px; /* Reduced height */
+    font-size: 0.8rem; /* Reduced font size */
+    /* Ensure booked slots adjust text size too */
+  }
+
+  .appointment-info {
+      font-size: 0.7rem; /* Adjust font size in booked slots */
+      line-height: 1.1;
+  }
+
+   .appointment-info .client-name-display {
+       font-size: 0.65rem; /* Adjust client name size */
+  }
+}
+
+/* Keep existing media query for 600px if needed for other elements */
+@media (max-width: 600px) {
+   /* ... existing styles for 600px ... */
+   /* Example: If you still need header adjustments only for very small screens */
+    .calendar-header {
+       padding: 0.8rem 1rem; 
+       flex-direction: column; 
+       align-items: flex-start;
+    }
+    /* ... etc ... */
+}
+
+/* --- Styles for Catalina's Inline Form --- */
+.time-slot.input-active {
+  background-color: #e9ecef;
+  padding: 8px;
+  height: auto;
+  min-height: 55px;
+  border: 1px dashed #adb5bd;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.catalina-input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  align-items: stretch;
+  font-size: 0.85rem;
+}
+
+.catalina-input-form select,
+.catalina-input-form input[type="text"] {
+  padding: 8px 12px; /* Slightly more padding for rounded corners */
+  border: 1px solid #ccc; /* Slightly darker border */
+  border-radius: 15px; /* Increased border-radius */
+  font-size: inherit;
+  width: 100%; 
+  box-sizing: border-box; 
+  background-color: #ffffff; 
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.075); /* Subtle inset shadow */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Add transition */
+}
+
+/* Add focus styles */
+.catalina-input-form select:focus,
+.catalina-input-form input[type="text"]:focus {
+  border-color: #2a4d69; /* Highlight with theme color */
+  outline: none; /* Remove default outline */
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.075), 0 0 0 2px rgba(42, 77, 105, 0.2); /* Add subtle outer glow */
+}
+
+.catalina-input-form input[type="text"]::placeholder {
+  color: #aaa;
+}
+
+.catalina-input-form select {
+  cursor: pointer;
+  background-color: #ffffff; /* Changed back to white */
+  color: #495057; /* Changed back to default text color */
+  appearance: none; 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* Add custom arrow */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center; /* Adjusted position slightly */
+  background-size: 14px 10px; /* Adjusted size slightly */
+  padding-right: 1.8rem; /* Add padding to prevent text overlap */
+}
+
+.catalina-input-form select option {
+  background-color: #464746; /* Dark grey background for options */
+  color: #ffffff; /* White text for options */
+}
+
+/* Hide scrollbar */
+.catalina-input-form select::-webkit-scrollbar {
+  display: none;
+}
+.catalina-input-form select {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.catalina-form-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.catalina-form-buttons button {
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  line-height: 1.4;
+}
+
+.catalina-form-buttons button:first-of-type {
+  background-color: #2a4d69;
+  color: white;
+}
+
+.catalina-form-buttons button:first-of-type:hover:not(:disabled) {
+  background-color: #1e3a52;
+}
+
+.catalina-form-buttons button:last-of-type {
+  background-color: #6c757d;
+  color: white;
+}
+
+.catalina-form-buttons button:last-of-type:hover {
+  background-color: #5a6268;
+}
+
+.catalina-form-buttons button:active {
+    transform: scale(0.95);
+}
+
+.catalina-form-buttons button:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+  color: #e9ecef;
+}
+
+/* --- Style for Client Name Display in Booked Slot --- */
+.appointment-info .client-name-display {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-style: normal;
+  margin-top: -2px;
+}
+
+/* --- Style for Confirmed Appointments in Shared Calendar --- */
+.time-slot.booked.confirmed-appointment {
+  position: relative; /* Needed for z-index if overlapping occurs */
+  box-shadow: 0 0 10px 4px rgba(76, 175, 80, 0.7); /* Greenish glow */
+  /* Optional: Add a subtle border too */
+  /* border: 2px solid rgba(76, 175, 80, 0.5); */ 
+  z-index: 1; /* Ensure glow is visible above adjacent slots */
+}
+
+/* Ensure hover effect doesn't completely overwrite the confirmation glow */
+.time-slot.booked.confirmed-appointment.own-appointment:hover:not(.disabled-slot) {
+    opacity: 0.9; /* Adjust opacity slightly */
+    /* Keep the glow */
+    box-shadow: 0 0 10px 4px rgba(76, 175, 80, 0.8); 
+}
+
+/* --- Style for Speech Generator Button --- */
+.speech-button {
+  position: absolute;
+  top: 4px; /* Adjust position as needed */
+  right: 4px; /* Adjust position as needed */
+  background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent background */
+  border: none;
+  border-radius: 50%; /* Circular */
+  width: 24px;
+  height: 24px;
+  font-size: 14px; /* Adjust icon size */
+  line-height: 24px; /* Center icon vertically */
+  text-align: center;
+  cursor: pointer;
+  padding: 0;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  opacity: 0.7; /* Slightly faded normally */
+  z-index: 3; /* Ensure it's above other content */
+}
+
+.time-slot:hover .speech-button {
+  opacity: 1; /* Fully visible on hover */
+}
+
+.speech-button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.1);
+}
+
+.speech-button:active {
+  transform: scale(1.0);
 } 

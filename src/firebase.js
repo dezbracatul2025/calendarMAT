@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, initializeFirestore, enableIndexedDbPersistence } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getAnalytics } from 'firebase/analytics';
 
@@ -17,28 +17,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firestore with offline persistence enabled
-let db;
-try {
-  db = initializeFirestore(app, { 
-    localCache: enableIndexedDbPersistence({forceOwnership: true})
-  });
-  console.log("Firestore persistence enabled.");
-} catch (error) {
-  if (error.code == 'failed-precondition') {
-    console.warn("Firestore persistence failed (failed-precondition). Multiple tabs open?");
-    // Use default Firestore instance if persistence fails
-    db = getFirestore(app);
-  } else if (error.code == 'unimplemented') {
-    console.warn("Firestore persistence failed (unimplemented). Browser not supported?");
-    // Use default Firestore instance if persistence fails
-    db = getFirestore(app);
-  } else {
-    console.error("Firestore initialization failed:", error);
-    // Fallback to default Firestore instance
-    db = getFirestore(app);
-  }
-}
+// Initialize Firestore (varianta simplă)
+const db = getFirestore(app);
+console.log("Firestore initialized (standard).");
 
 const auth = getAuth(app);
 

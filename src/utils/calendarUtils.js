@@ -14,6 +14,16 @@ export const getCurrentWeekStart = () => {
 export const generateWeekDates = (startDate) => {
   const weeks = [];
   
+  // Simple translation map
+  const dayNameTranslations = {
+    'Monday': 'Luni',
+    'Tuesday': 'Marți',
+    'Wednesday': 'Miercuri',
+    'Thursday': 'Joi',
+    'Friday': 'Vineri'
+    // Add Saturday/Sunday if you ever display them
+  };
+
   // Generate 3 weeks
   for (let weekIndex = 0; weekIndex < 3; weekIndex++) {
     const weekStart = moment(startDate).add(weekIndex * 7, 'days');
@@ -22,9 +32,10 @@ export const generateWeekDates = (startDate) => {
     // Generate weekdays (Monday to Friday)
     for (let day = 0; day < 5; day++) {
       const currentDate = moment(weekStart).add(day, 'days');
+      const englishDayName = currentDate.format('dddd'); // Get English name
       weekDays.push({
         date: currentDate,
-        dayName: currentDate.format('dddd'),
+        dayName: dayNameTranslations[englishDayName] || englishDayName, // Translate or fallback
         dayMonth: currentDate.format('D.M.YY')
       });
     }

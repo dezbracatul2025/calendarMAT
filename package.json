@@ -11,6 +11,9 @@
     "start:local": "node ./node_modules/react-scripts/bin/react-scripts.js start",
     "start:npx": "npx react-scripts start"
   },
+  "engines": {
+    "node": "16.x || 18.x"
+  },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

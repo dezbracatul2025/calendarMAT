@@ -35,6 +35,19 @@ function Login() {
 
   return (
     <div className="login-container">
+      {/* Video Background Element */}
+      <video 
+        autoPlay 
+        muted 
+        loop 
+        playsInline 
+        className="login-video-bg"
+      >
+        <source src="https://cdn.glitch.global/be1c0130-336b-4c7a-b28f-528d3d64db4e/WAVES.mp4?v=1745015337324" type="video/mp4" /> 
+        {/* You can still add other formats if needed */}
+        Your browser does not support the video tag.
+      </video>
+      
       <div className="login-card">
         <h1 className="login-title">Calendar Agenți</h1>
         

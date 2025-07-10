@@ -4,24 +4,27 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 const agentsData = {
   // Echipa Andreea
   Andreea:    { team: "Andreea",  password: "motivatie25",   color: "#FFA500" },
-  Claudiu:    { team: "Andreea",  password: "perseverenta25",color: "#008000" },
+  Claudiu:    { team: "Andreea",  password: "perseverenta25",color: "#0CB6EF" },
   Cosmina:    { team: "Andreea",  password: "ambitie25",     color: "#FFC107" },
   Monica:     { team: "Andreea",  password: "floare12",      color: "#8E44AD" },
   Valentina:  { team: "Andreea",  password: "soare27",       color: "#F39C12" },
   // Echipa Cristina
-  Cristina:   { team: "Cristina", password: "piatra34",      color: "#FF69B4" },
-  Florin:     { team: "Cristina", password: "mar07",         color: "#1E90FF" },
-  Larisa:     { team: "Cristina", password: "larisaPass",    color: "#20B2AA" },
-  Voicu:      { team: "Cristina", password: "cerul22",       color: "#3498DB" },
-  Sorina:     { team: "Cristina", password: "carte19",       color: "#E67E22" },
-  Adriana:    { team: "Cristina", password: "nor05",         color: "#2ECC71" },
-  Dida:       { team: "Cristina", password: "nuc08",         color: "#A569BD" },
+  Cristina:   { team: "Cristina", password: "antipatica",      color: "#FF69B4" },
+  Florin:     { team: "Cristina", password: "mar07",         color: "#2ECC71" },
+  Larisa:     { team: "Cristina", password: "iqos",    color: "#20B2AA" },
+  Voicu:      { team: "Cristina", password: "culturist",       color: "#fb8500" },
+  Adriana:    { team: "Cristina", password: "sarmale",         color: "#d00000" },
+  Dida:       { team: "Cristina", password: "superb",         color: "#A569BD" },
+  "Valentina P": { team: "Cristina", password: "oglinda",       color: "#60a5fa" },
   // Echipa Scarlat
-  Scarlat:    { team: "Scarlat",  password: "munte17",       color: "#2C3E50" },
-  Mihaela:    { team: "Scarlat",  password: "ploaie14",      color: "#C0392B" },
-  Andrei:     { team: "Scarlat",  password: "luna30",        color: "#7F8C8D" },
-  Niki:       { team: "Scarlat",  password: "frunza09",      color: "#16A085" },
-  George:     { team: "Scarlat",  password: "georgePass",    color: "#8E44AD" },
+  Scarlat:    { team: "Scarlat",  password: "neymar",       color: "#2C3E50" },
+  Mihaela:    { team: "Scarlat",  password: "caine",      color: "#C0392B" },
+  Andrei:     { team: "Scarlat",  password: "scoala",        color: "#7F8C8D" },
+  Niki:       { team: "Scarlat",  password: "hamilton",      color: "#16A085" },
+  George:     { team: "Scarlat",  password: "grasu",    color: "#8E44AD" },
+  "Alin M":   { team: "Scarlat",  password: "carte55",     color: "#FFD700" },
+  // radiere bc boss
+  Catalina:   { team: "SHARED_CREDIT", password: "neatamas", color: "#FA2A2A" },
   // Admin user
   Alin:       { team: "Admin",    password: "sefulabani",    color: "#000000" }
 };
@@ -36,8 +39,8 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   
-  // Get all agent names for dropdown
-  const agentNames = Object.keys(agentsData);
+  // Get all agent names for dropdown and sort them alphabetically
+  const agentNames = Object.keys(agentsData).sort();
   
   // Login function
   const login = (agentName, password) => {
