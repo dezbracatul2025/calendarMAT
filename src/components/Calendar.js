@@ -397,6 +397,24 @@ function Calendar() {
     logout();
     navigate('/');
   };
+
+  // Function to run timestamp migration (only for Claudiu)
+  const handleRunTimestampMigration = async () => {
+    if (currentUser.name !== 'Claudiu') return;
+    
+    setMessage('Se adaugă timestamp-uri la programările existente...');
+    try {
+      const success = await migrateAllExistingAppointments();
+      if (success) {
+        setMessage('Timestamp-uri adăugate cu succes! Verifică Firebase Console.');
+      } else {
+        setMessage('Eroare la adăugarea timestamp-urilor.');
+      }
+    } catch (error) {
+      setMessage('Eroare: ' + error.message);
+    }
+    setTimeout(() => setMessage(''), 5000);
+  };
   
   // Determine available views and set initial active view
   useEffect(() => {
@@ -974,6 +992,28 @@ function Calendar() {
       <button className="logout-button" onClick={handleLogout}>
         Deconectare
       </button>
+
+      {/* Timestamp migration button (only for Claudiu) */}
+      {currentUser.name === 'Claudiu' && (
+        <button 
+          className="migration-button" 
+          onClick={handleRunTimestampMigration}
+          style={{
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            backgroundColor: '#4CAF50',
+            color: 'white',
+            border: 'none',
+            padding: '10px 15px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            zIndex: 1000
+          }}
+        >
+          Adaugă Timestamp-uri
+        </button>
+      )}
 
       {/* --- Render Speech Popup Conditionally --- */}
       {selectedAppointmentForSpeech && (
