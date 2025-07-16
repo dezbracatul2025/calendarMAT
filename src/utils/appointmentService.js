@@ -13,7 +13,8 @@ import {
   writeBatch,
   where,
   documentId,
-  updateDoc
+  updateDoc,
+  serverTimestamp
 } from 'firebase/firestore';
 import { formatDateForId } from './calendarUtils';
 
@@ -123,7 +124,8 @@ export const makeAppointment = async (
       agentName: agentData.name, // Always store the name of the user making the booking
       // Use selectedAgentColor if provided (from Catalina's form), otherwise use the booking agent's color
       color: selectedAgentColor !== undefined ? selectedAgentColor : agentData.color, 
-      time
+      time,
+      createdAt: serverTimestamp() // Add createdAt timestamp
     };
 
     // Add selectedAgent and clientName if provided (from Catalina's form)
@@ -360,4 +362,136 @@ export const deleteOldAppointmentsForTeam = async (teamName, cutoffDateString) =
     console.error(`Error deleting old appointments for team ${teamName}:`, error);
     return -1; // Indicate error
   }
+};
+
+// Add createdAt timestamp to existing appointments (migration function)
+export const addTimestampToExistingAppointments = async (teamName) => {
+  if (!teamName) {
+    console.error("addTimestampToExistingAppointments: Missing team name");
+    return false;
+  }
+
+  try {
+    const teamAppointmentsRef = getTeamAppointmentsRef(teamName);
+    const querySnapshot = await getDocs(teamAppointmentsRef);
+    
+    const batch = writeBatch(db);
+    let updatedCount = 0;
+
+    querySnapshot.forEach((dateDoc) => {
+      const dateData = dateDoc.data();
+      let hasChanges = false;
+      const updatedData = {};
+
+      // Check each time slot in the date document
+      Object.keys(dateData).forEach((timeSlot) => {
+        const appointment = dateData[timeSlot];
+        
+        // Only add timestamp if it doesn't already exist
+        if (appointment && !appointment.createdAt) {
+          updatedData[timeSlot] = {
+            ...appointment,
+            createdAt: serverTimestamp()
+          };
+          hasChanges = true;
+        }
+      });
+
+      // If we have changes, add to batch
+      if (hasChanges) {
+        batch.update(dateDoc.ref, updatedData);
+        updatedCount++;
+      }
+    });
+
+    // Commit all changes
+    if (updatedCount > 0) {
+      await batch.commit();
+      console.log(`Updated ${updatedCount} date documents for team ${teamName} with timestamps`);
+    } else {
+      console.log(`No appointments found without timestamps for team ${teamName}`);
+    }
+
+    return true;
+  } catch (error) {
+    console.error(`Error adding timestamps to existing appointments for team ${teamName}:`, error);
+    return false;
+  }
+};
+
+// Add timestamps to all existing appointments across all teams
+export const migrateAllExistingAppointments = async () => {
+  const teams = ['Andreea', 'Cristina', 'Scarlat', 'SHARED_CREDIT'];
+  
+  try {
+    for (const team of teams) {
+      console.log(`Migrating timestamps for team: ${team}`);
+      await addTimestampToExistingAppointments(team);
+    }
+    console.log('Migration completed for all teams');
+    return true;
+  } catch (error) {
+    console.error('Error during migration:', error);
+    return false;
+  }
+};
+
+// Helper function to format timestamp for display
+export const formatTimestamp = (timestamp) => {
+  if (!timestamp) return 'Timestamp necunoscut';
+  
+  try {
+    // If it's a Firestore timestamp
+    if (timestamp.toDate) {
+      const date = timestamp.toDate();
+      return date.toLocaleString('ro-RO', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+    }
+    
+    // If it's a regular Date object
+    if (timestamp instanceof Date) {
+      return timestamp.toLocaleString('ro-RO', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+    }
+    
+    // If it's a number (milliseconds)
+    if (typeof timestamp === 'number') {
+      const date = new Date(timestamp);
+      return date.toLocaleString('ro-RO', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+    }
+    
+    return 'Format timestamp necunoscut';
+  } catch (error) {
+    console.error('Error formatting timestamp:', error);
+    return 'Eroare formatare timestamp';
+  }
+};
+
+// Function to get appointment details with formatted timestamp
+export const getAppointmentWithTimestamp = (appointment) => {
+  if (!appointment) return null;
+  
+  return {
+    ...appointment,
+    formattedCreatedAt: appointment.createdAt ? formatTimestamp(appointment.createdAt) : 'Timestamp necunoscut'
+  };
 };
