@@ -436,6 +436,10 @@ function Calendar() {
   const handleForceClearTeamBuilding = async () => {
     if (currentUser.name !== 'Claudiu') return;
     
+    // Ask for confirmation
+    const confirmed = window.confirm('Sigur vrei să resetezi toate datele TeamBuilding la 0? Această acțiune nu poate fi anulată.');
+    if (!confirmed) return;
+    
     setMessage('Se resetează datele TeamBuilding la 0...');
     try {
       const success = await forceClearTeamBuilding();
@@ -1052,16 +1056,16 @@ function Calendar() {
         </button>
       )}
 
-      {/* Clear TeamBuilding button (only for Claudiu) */}
+      {/* Reset TeamBuilding button (only for Claudiu) */}
       {currentUser.name === 'Claudiu' && (
-        <button
-          className="clear-team-building-button"
-          onClick={handleClearTeamBuilding}
+        <button 
+          className="force-clear-team-building-button" 
+          onClick={handleForceClearTeamBuilding}
           style={{
             position: 'fixed',
             bottom: '20px',
             left: '20px',
-            backgroundColor: '#FF9800',
+            backgroundColor: '#F44336',
             color: 'white',
             border: 'none',
             padding: '8px 12px',
@@ -1071,7 +1075,7 @@ function Calendar() {
             fontSize: '12px'
           }}
         >
-          Șterge Date TeamBuilding
+          Resetare TeamBuilding
         </button>
       )}
 
