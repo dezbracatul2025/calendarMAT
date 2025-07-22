@@ -1031,8 +1031,8 @@ function Calendar() {
 
       {/* Timestamp migration button (only for Claudiu) */}
       {currentUser.name === 'Claudiu' && (
-        <button 
-          className="migration-button" 
+        <button
+          className="migration-button"
           onClick={handleRunTimestampMigration}
           style={{
             position: 'fixed',
@@ -1041,10 +1041,11 @@ function Calendar() {
             backgroundColor: '#4CAF50',
             color: 'white',
             border: 'none',
-            padding: '10px 15px',
+            padding: '8px 12px',
             borderRadius: '5px',
             cursor: 'pointer',
-            zIndex: 1000
+            zIndex: 1000,
+            fontSize: '12px'
           }}
         >
           Adaugă Timestamp-uri
@@ -1053,8 +1054,8 @@ function Calendar() {
 
       {/* Clear TeamBuilding button (only for Claudiu) */}
       {currentUser.name === 'Claudiu' && (
-        <button 
-          className="clear-team-building-button" 
+        <button
+          className="clear-team-building-button"
           onClick={handleClearTeamBuilding}
           style={{
             position: 'fixed',
@@ -1063,10 +1064,11 @@ function Calendar() {
             backgroundColor: '#FF9800',
             color: 'white',
             border: 'none',
-            padding: '10px 15px',
+            padding: '8px 12px',
             borderRadius: '5px',
             cursor: 'pointer',
-            zIndex: 1000
+            zIndex: 1000,
+            fontSize: '12px'
           }}
         >
           Șterge Date TeamBuilding
@@ -1080,15 +1082,16 @@ function Calendar() {
           onClick={handleForceClearTeamBuilding}
           style={{
             position: 'fixed',
-            bottom: '20px',
+            bottom: '60px',
             left: '20px',
             backgroundColor: '#F44336',
             color: 'white',
             border: 'none',
-            padding: '10px 15px',
+            padding: '8px 12px',
             borderRadius: '5px',
             cursor: 'pointer',
-            zIndex: 1000
+            zIndex: 1000,
+            fontSize: '12px'
           }}
         >
           Reset TeamBuilding la 0
