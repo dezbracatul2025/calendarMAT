@@ -436,15 +436,15 @@ function Calendar() {
   const handleForceClearTeamBuilding = async () => {
     if (currentUser.name !== 'Claudiu') return;
     
-    setMessage('Se șterg forțat datele TeamBuilding...');
+    setMessage('Se resetează datele TeamBuilding la 0...');
     try {
       const success = await forceClearTeamBuilding();
       if (success) {
-        setMessage('Datele TeamBuilding au fost șterse forțat!');
+        setMessage('Datele TeamBuilding au fost resetate la 0! Toți agenții încep din nou.');
         // Force page reload to clear all state
         setTimeout(() => window.location.reload(), 2000);
       } else {
-        setMessage('Eroare la ștergerea forțată a datelor TeamBuilding.');
+        setMessage('Eroare la resetarea datelor TeamBuilding.');
       }
     } catch (error) {
       setMessage('Eroare: ' + error.message);
@@ -1091,7 +1091,7 @@ function Calendar() {
             zIndex: 1000
           }}
         >
-          Șterge Forțat Date TeamBuilding
+          Reset TeamBuilding la 0
         </button>
       )}
 

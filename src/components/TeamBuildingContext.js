@@ -103,24 +103,28 @@ export function TeamBuildingProvider({ children }) {
   // Force clear all TeamBuilding data immediately
   const forceClearTeamBuilding = async () => {
     try {
-      // Clear from Firebase
+      // Reset all contributions to 0 in Firebase (instead of deleting)
       const batch = writeBatch(db);
       KNOWN_PARTICIPANTS.forEach(name => {
         const docRef = doc(db, COLLECTION_NAME, name);
-        batch.delete(docRef);
+        batch.set(docRef, { amount: 0 });
       });
       await batch.commit();
       
       // Clear from localStorage
       localStorage.removeItem('teamBuildingContributions');
       
-      // Clear from state
-      setContributions({});
+      // Reset state to all zeros
+      const resetContributions = {};
+      KNOWN_PARTICIPANTS.forEach(name => {
+        resetContributions[name] = 0;
+      });
+      setContributions(resetContributions);
       
-      console.log('Force cleared all TeamBuilding data');
+      console.log('Force reset all TeamBuilding data to 0');
       return true;
     } catch (error) {
-      console.error('Error force clearing TeamBuilding:', error);
+      console.error('Error force resetting TeamBuilding:', error);
       return false;
     }
   };
