@@ -153,7 +153,7 @@ const getNextWorkingDay = (startDate) => {
 function Calendar() {
   // Get agentNames and agentsData from useAuth
   const { currentUser, logout, agentNames: ALL_POSSIBLE_AGENTS, agentsData } = useAuth(); 
-  const { clearTeamBuilding } = useTeamBuilding();
+  const { clearTeamBuilding, forceClearTeamBuilding } = useTeamBuilding();
   const navigate = useNavigate();
   const [currentRealTime, setCurrentRealTime] = useState(moment()); // Store moment object for time
   const [todayDateString, setTodayDateString] = useState(moment().format('YYYY-MM-DD')); // Store current date string
@@ -428,6 +428,26 @@ function Calendar() {
       setMessage('Datele TeamBuilding au fost șterse cu succes!');
     } catch (error) {
       setMessage('Eroare la ștergerea datelor TeamBuilding.');
+    }
+    setTimeout(() => setMessage(''), 5000);
+  };
+
+  // Force clear TeamBuilding data (only for Claudiu)
+  const handleForceClearTeamBuilding = async () => {
+    if (currentUser.name !== 'Claudiu') return;
+    
+    setMessage('Se șterg forțat datele TeamBuilding...');
+    try {
+      const success = await forceClearTeamBuilding();
+      if (success) {
+        setMessage('Datele TeamBuilding au fost șterse forțat!');
+        // Force page reload to clear all state
+        setTimeout(() => window.location.reload(), 2000);
+      } else {
+        setMessage('Eroare la ștergerea forțată a datelor TeamBuilding.');
+      }
+    } catch (error) {
+      setMessage('Eroare: ' + error.message);
     }
     setTimeout(() => setMessage(''), 5000);
   };
@@ -1050,6 +1070,28 @@ function Calendar() {
           }}
         >
           Șterge Date TeamBuilding
+        </button>
+      )}
+
+      {/* Force Clear TeamBuilding button (only for Claudiu) */}
+      {currentUser.name === 'Claudiu' && (
+        <button 
+          className="force-clear-team-building-button" 
+          onClick={handleForceClearTeamBuilding}
+          style={{
+            position: 'fixed',
+            bottom: '20px',
+            left: '20px',
+            backgroundColor: '#F44336',
+            color: 'white',
+            border: 'none',
+            padding: '10px 15px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            zIndex: 1000
+          }}
+        >
+          Șterge Forțat Date TeamBuilding
         </button>
       )}
 

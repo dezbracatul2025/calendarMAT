@@ -100,12 +100,38 @@ export function TeamBuildingProvider({ children }) {
     }
   };
 
+  // Force clear all TeamBuilding data immediately
+  const forceClearTeamBuilding = async () => {
+    try {
+      // Clear from Firebase
+      const batch = writeBatch(db);
+      KNOWN_PARTICIPANTS.forEach(name => {
+        const docRef = doc(db, COLLECTION_NAME, name);
+        batch.delete(docRef);
+      });
+      await batch.commit();
+      
+      // Clear from localStorage
+      localStorage.removeItem('teamBuildingContributions');
+      
+      // Clear from state
+      setContributions({});
+      
+      console.log('Force cleared all TeamBuilding data');
+      return true;
+    } catch (error) {
+      console.error('Error force clearing TeamBuilding:', error);
+      return false;
+    }
+  };
+
   const value = {
     contributions,
     addToTeamBuilding,
     isLoading,
     error,
-    clearTeamBuilding
+    clearTeamBuilding,
+    forceClearTeamBuilding
   };
 
   return (
