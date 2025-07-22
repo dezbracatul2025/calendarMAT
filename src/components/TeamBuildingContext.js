@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { db } from '../firebase';
-import { collection, doc, onSnapshot, setDoc, increment } from 'firebase/firestore';
+import { collection, doc, onSnapshot, setDoc, increment, deleteDoc, writeBatch } from 'firebase/firestore';
 
 const TeamBuildingContext = createContext();
 const COLLECTION_NAME = 'teambuilding_contributions';
@@ -81,11 +81,31 @@ export function TeamBuildingProvider({ children }) {
     }
   };
 
+  const clearTeamBuilding = async () => {
+    const batch = writeBatch(db);
+    KNOWN_PARTICIPANTS.forEach(name => {
+      const docRef = doc(db, COLLECTION_NAME, name);
+      batch.delete(docRef);
+    });
+
+    try {
+      await batch.commit();
+      console.log('Context: Successfully cleared all TeamBuilding contributions.');
+      setContributions({}); // Clear local state
+      localStorage.removeItem('teamBuildingContributions');
+    } catch (err) {
+      console.error('Context: Error clearing TeamBuilding contributions:', err);
+      setError('Eroare la ștergerea contribuțiilor TeamBuilding.');
+      setTimeout(() => setError(null), 3000);
+    }
+  };
+
   const value = {
     contributions,
     addToTeamBuilding,
     isLoading,
-    error
+    error,
+    clearTeamBuilding
   };
 
   return (

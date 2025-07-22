@@ -26,6 +26,7 @@ import TeamBuildingWidget from './TeamBuildingWidget'; // <<< Import the new com
 import SpeechGeneratorPopup from './SpeechGeneratorPopup'; // <<< Import new component
 import NextAppointmentWidget from './NextAppointmentWidget'; // <<< Import new widget
 import DebtsWidget from './DebtsWidget';
+import { useTeamBuilding } from './TeamBuildingContext';
 
 // Set moment locale globally for this component/app part
 moment.locale('ro');
@@ -152,6 +153,7 @@ const getNextWorkingDay = (startDate) => {
 function Calendar() {
   // Get agentNames and agentsData from useAuth
   const { currentUser, logout, agentNames: ALL_POSSIBLE_AGENTS, agentsData } = useAuth(); 
+  const { clearTeamBuilding } = useTeamBuilding();
   const navigate = useNavigate();
   const [currentRealTime, setCurrentRealTime] = useState(moment()); // Store moment object for time
   const [todayDateString, setTodayDateString] = useState(moment().format('YYYY-MM-DD')); // Store current date string
@@ -397,7 +399,7 @@ function Calendar() {
     logout();
     navigate('/');
   };
-
+  
   // Function to run timestamp migration (only for Claudiu)
   const handleRunTimestampMigration = async () => {
     if (currentUser.name !== 'Claudiu') return;
@@ -412,6 +414,20 @@ function Calendar() {
       }
     } catch (error) {
       setMessage('Eroare: ' + error.message);
+    }
+    setTimeout(() => setMessage(''), 5000);
+  };
+
+  // Function to clear TeamBuilding data (only for Claudiu)
+  const handleClearTeamBuilding = async () => {
+    if (currentUser.name !== 'Claudiu') return;
+    
+    setMessage('Se șterg datele TeamBuilding...');
+    try {
+      await clearTeamBuilding();
+      setMessage('Datele TeamBuilding au fost șterse cu succes!');
+    } catch (error) {
+      setMessage('Eroare la ștergerea datelor TeamBuilding.');
     }
     setTimeout(() => setMessage(''), 5000);
   };
@@ -1012,6 +1028,28 @@ function Calendar() {
           }}
         >
           Adaugă Timestamp-uri
+        </button>
+      )}
+
+      {/* Clear TeamBuilding button (only for Claudiu) */}
+      {currentUser.name === 'Claudiu' && (
+        <button 
+          className="clear-team-building-button" 
+          onClick={handleClearTeamBuilding}
+          style={{
+            position: 'fixed',
+            bottom: '20px',
+            left: '20px',
+            backgroundColor: '#FF9800',
+            color: 'white',
+            border: 'none',
+            padding: '10px 15px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            zIndex: 1000
+          }}
+        >
+          Șterge Date TeamBuilding
         </button>
       )}
 
