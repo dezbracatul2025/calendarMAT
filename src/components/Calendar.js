@@ -1079,29 +1079,6 @@ function Calendar() {
         </button>
       )}
 
-      {/* Force Clear TeamBuilding button (only for Claudiu) */}
-      {currentUser.name === 'Claudiu' && (
-        <button 
-          className="force-clear-team-building-button" 
-          onClick={handleForceClearTeamBuilding}
-          style={{
-            position: 'fixed',
-            bottom: '60px',
-            left: '20px',
-            backgroundColor: '#F44336',
-            color: 'white',
-            border: 'none',
-            padding: '8px 12px',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            zIndex: 1000,
-            fontSize: '12px'
-          }}
-        >
-          Reset TeamBuilding la 0
-        </button>
-      )}
-
       {/* --- Render Speech Popup Conditionally --- */}
       {selectedAppointmentForSpeech && (
         <SpeechGeneratorPopup 
