@@ -125,7 +125,14 @@ export const makeAppointment = async (
       // Use selectedAgentColor if provided (from Catalina's form), otherwise use the booking agent's color
       color: selectedAgentColor !== undefined ? selectedAgentColor : agentData.color, 
       time,
-      createdAt: serverTimestamp() // Add createdAt timestamp
+      createdAt: serverTimestamp(), // Firebase timestamp
+      adaugatLa: new Date().toLocaleString('ro-RO', {
+        day: '2-digit',
+        month: '2-digit', 
+        year: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      }) // Romanian timestamp format
     };
 
     // Add selectedAgent and clientName if provided (from Catalina's form)
@@ -239,7 +246,15 @@ export const confirmAppointment = async (date, time, targetTeamName) => {
     // Update the specific slot data to include isConfirmed: true
     const updatedSlotData = { 
         ...currentData[slotId], 
-        isConfirmed: true 
+        isConfirmed: true,
+        confirmedAt: serverTimestamp(), // Firebase timestamp
+        confirmatLa: new Date().toLocaleString('ro-RO', {
+          day: '2-digit',
+          month: '2-digit', 
+          year: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit'
+        }) // Romanian timestamp format
     };
 
     await updateDoc(dateDocRef, {
@@ -290,7 +305,15 @@ export const deconfirmAppointment = async (date, time, targetTeamName) => {
     // Option 1: Set to false
     const updatedSlotData = { 
         ...currentData[slotId], 
-        isConfirmed: false 
+        isConfirmed: false,
+        deconfirmedAt: serverTimestamp(), // Firebase timestamp
+        deconfirmatLa: new Date().toLocaleString('ro-RO', {
+          day: '2-digit',
+          month: '2-digit', 
+          year: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit'
+        }) // Romanian timestamp format
     };
     // Option 2: Remove the field (requires FieldValue.delete() - more complex import)
     // For simplicity, let's set it to false.
