@@ -444,7 +444,7 @@ function Calendar() {
   
   // Determine available views and set initial active view
   useEffect(() => {
-    // TEMPORAR: Șterge Adriana din localStorage
+    // Șterge Adriana din localStorage definitiv
     const saved = localStorage.getItem('teamBuildingContributions');
     if (saved) {
       const parsed = JSON.parse(saved);
