@@ -16,6 +16,7 @@ const agentsData = {
   Adriana:    { team: "Cristina", password: "sarmale",         color: "#d00000" },
   Dida:       { team: "Cristina", password: "superb",         color: "#A569BD" },
   "Valentina P": { team: "Cristina", password: "oglinda",       color: "#60a5fa" },
+  Luca:       { team: "Cristina", password: "colac20",         color: "#1E3A8A" },
   // Echipa Scarlat
   Scarlat:    { team: "Scarlat",  password: "neymar",       color: "#2C3E50" },
   Mihaela:    { team: "Scarlat",  password: "caine",      color: "#C0392B" },
