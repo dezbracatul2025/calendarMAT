@@ -444,6 +444,14 @@ function Calendar() {
   
   // Determine available views and set initial active view
   useEffect(() => {
+    // TEMPORAR: Șterge Adriana din localStorage
+    const saved = localStorage.getItem('teamBuildingContributions');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      delete parsed['Adriana'];
+      localStorage.setItem('teamBuildingContributions', JSON.stringify(parsed));
+    }
+    
     if (currentUser) {
       let viewsToShow = [];
       let initialActive = null;
