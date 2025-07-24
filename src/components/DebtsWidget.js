@@ -8,7 +8,7 @@ import './DebtsWidget.css';
 const DEBTS_WIDGET_AGENTS = [
   'Claudiu', 'Voicu', 'Cosmina', 'Cristina', 'Andreea', 'George', 'Florin', 
   'Mihaela', 'Scarlat', 'Catalina', 'Adriana', 'Andrei', 'Niki', 
-  'Valentina P', 'Alin M'
+  'Valentina P', 'Alin M', 'Luca', 'Larisa'
 ];
 
 const DebtsWidget = () => {
