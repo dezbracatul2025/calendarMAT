@@ -7,7 +7,7 @@ const COLLECTION_NAME = 'teambuilding_contributions';
 
 const KNOWN_PARTICIPANTS = [
   'Claudiu', 'Voicu', 'Cosmina', 'Cristina', 'Andreea', 'George', 'Florin', 
-  'Mihaela', 'Scarlat', 'Catalina', 'Adriana', 'Andrei', 'Niki', 
+  'Mihaela', 'Scarlat', 'Catalina', 'Andrei', 'Niki', 
   'Valentina P', 'Alin M', 'Luca', 'Larisa'
 ];
 

@@ -9,8 +9,8 @@ import './TeamBuildingWidget.css';
 // For now, we'll assume the context handles the list and data, and this component consumes it.
 const PARTICIPANTS = [
   'Claudiu', 'Voicu', 'Cosmina', 'Cristina', 'Andreea', 'George', 'Florin', 
-  'Mihaela', 'Scarlat', 'Catalina', 'Adriana', 'Andrei', 'Niki', 
-  'Valentina P', 'Alin M'
+  'Mihaela', 'Scarlat', 'Catalina', 'Andrei', 'Niki', 
+  'Valentina P', 'Alin M', 'Luca', 'Larisa'
 ]; // This is still used by DebtsWidget, ensure it's consistent or refactor DebtsWidget too.
 
 const COLLECTION_NAME = 'teambuilding_contributions';

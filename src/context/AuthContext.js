@@ -13,7 +13,6 @@ const agentsData = {
   Florin:     { team: "Cristina", password: "mar07",         color: "#2ECC71" },
   Larisa:     { team: "Cristina", password: "iqos",    color: "#20B2AA" },
   Voicu:      { team: "Cristina", password: "culturist",       color: "#fb8500" },
-  Adriana:    { team: "Cristina", password: "sarmale",         color: "#d00000" },
   Dida:       { team: "Cristina", password: "superb",         color: "#A569BD" },
   "Valentina P": { team: "Cristina", password: "oglinda",       color: "#60a5fa" },
   Luca:       { team: "Cristina", password: "colac20",         color: "#1E3A8A" },

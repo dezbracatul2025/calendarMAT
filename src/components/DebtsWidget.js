@@ -7,7 +7,7 @@ import './DebtsWidget.css';
 // Define the list of agents specifically for DebtsWidget
 const DEBTS_WIDGET_AGENTS = [
   'Claudiu', 'Voicu', 'Cosmina', 'Cristina', 'Andreea', 'George', 'Florin', 
-  'Mihaela', 'Scarlat', 'Catalina', 'Adriana', 'Andrei', 'Niki', 
+  'Mihaela', 'Scarlat', 'Catalina', 'Andrei', 'Niki', 
   'Valentina P', 'Alin M', 'Luca', 'Larisa'
 ];
 
