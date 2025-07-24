@@ -396,6 +396,10 @@ function Calendar() {
   
   // Handle logout
   const handleLogout = () => {
+    // Save current user to localStorage before logout
+    if (currentUser && currentUser.name) {
+      localStorage.setItem('lastSelectedAgent', currentUser.name);
+    }
     logout();
     navigate('/');
   };

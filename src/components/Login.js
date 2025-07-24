@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Login.css';
 
 function Login() {
@@ -9,6 +9,24 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Pre-select agent from URL parameter or localStorage
+  useEffect(() => {
+    // Check URL parameter first
+    const urlParams = new URLSearchParams(location.search);
+    const agentFromUrl = urlParams.get('agent');
+    
+    // Check localStorage for last used agent
+    const lastAgent = localStorage.getItem('lastSelectedAgent');
+    
+    // Priority: URL parameter > localStorage > empty
+    const agentToSelect = agentFromUrl || lastAgent || '';
+    
+    if (agentToSelect && agentNames.includes(agentToSelect)) {
+      setSelectedAgent(agentToSelect);
+    }
+  }, [agentNames, location]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,6 +41,9 @@ function Login() {
       setError('Te rog introdu parola');
       return;
     }
+    
+    // Save selected agent to localStorage
+    localStorage.setItem('lastSelectedAgent', selectedAgent);
     
     const result = login(selectedAgent, password);
     
