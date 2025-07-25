@@ -16,14 +16,8 @@ export function useTeamBuilding() {
 }
 
 export function TeamBuildingProvider({ children }) {
-  const [contributions, setContributions] = useState(() => {
-    const saved = localStorage.getItem('teamBuildingContributions');
-    const initialContributions = {};
-    KNOWN_PARTICIPANTS.forEach(name => {
-      initialContributions[name] = 0;
-    });
-    return saved ? { ...initialContributions, ...JSON.parse(saved) } : initialContributions;
-  });
+  // Inițializează cu valori goale, nu din localStorage
+  const [contributions, setContributions] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -32,18 +26,20 @@ export function TeamBuildingProvider({ children }) {
     const collRef = collection(db, COLLECTION_NAME);
     const unsubscribe = onSnapshot(collRef, (snapshot) => {
       const fetchedContributions = {};
+      
+      // Inițializează toți participanții cu 0
+      KNOWN_PARTICIPANTS.forEach(name => {
+        fetchedContributions[name] = 0;
+      });
+      
+      // Actualizează cu datele din Firebase
       snapshot.forEach(docSnap => {
         if (KNOWN_PARTICIPANTS.includes(docSnap.id)) {
           fetchedContributions[docSnap.id] = docSnap.data().amount || 0;
         }
       });
-
-      const updatedContributions = { ...contributions };
-      KNOWN_PARTICIPANTS.forEach(name => {
-        updatedContributions[name] = fetchedContributions[name] || contributions[name] || 0;
-      });
       
-      setContributions(prev => ({ ...prev, ...updatedContributions }));
+      setContributions(fetchedContributions);
       setIsLoading(false);
       setError(null);
     }, (err) => {
@@ -55,9 +51,10 @@ export function TeamBuildingProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('teamBuildingContributions', JSON.stringify(contributions));
-  }, [contributions]);
+  // Elimină salvarea în localStorage pentru a evita conflictele
+  // useEffect(() => {
+  //   localStorage.setItem('teamBuildingContributions', JSON.stringify(contributions));
+  // }, [contributions]);
 
   const addToTeamBuilding = async (agentName, amount) => {
     if (!KNOWN_PARTICIPANTS.includes(agentName)) {
