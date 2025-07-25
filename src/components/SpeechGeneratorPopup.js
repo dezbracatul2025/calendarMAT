@@ -68,12 +68,17 @@ function SpeechGeneratorPopup({ appointmentData, onClose, isOpen }) {
     if (selectedRefinantari.length > 0) {
         selectedRefinantari.forEach(addr => acteNecesare.push(`Adresa de refinanțare ${addr}`));
     }
-    acteNecesare.push("Buletinul");
+    acteNecesare.push("Carte de identitate");
     
     // --- Generate Plain Text for Copying (with asterisks) --- 
     const acteTextPlain = acteNecesare.join('\n');
+    
+    // Determină dacă este finanțare sau refinanțare în funcție de selecții
+    const hasAnySelection = pensionarSelected || contracteSelected || selectedRefinantari.length > 0;
+    const tipFinantare = hasAnySelection ? "refinanțare" : "finanțare";
+    
     // Add asterisks for WhatsApp bold formatting
-    const plainText = `Bună ziua!\nConform discuției telefonice, rămâne stabilită întâlnirea de *${zi}, ${dataFormatata}*, ora *${ora}*. Biroul nostru se află pe *${adresaBirou}*. Vă rog să mă sunați când ajungeți pentru a vă prelua.\nPentru refinanțare, vă rog să aveți la dumneavoastră următoarele documente:\n${acteTextPlain}\n\nVă aștept la întâlnire. Zi frumoasă!`;
+    const plainText = `Bună ziua!\nConform discuției telefonice, rămâne stabilită întâlnirea de *${zi}, ${dataFormatata}*, ora *${ora}*. Biroul nostru se află pe *${adresaBirou}*. Vă rog să mă sunați când ajungeți pentru a vă prelua.\nPentru ${tipFinantare}, vă rog să aveți la dumneavoastră următoarele documente:\n${acteTextPlain}\n\nVă aștept la întâlnire. Zi frumoasă!`;
 
     return plainText; // Return only plain text
 
