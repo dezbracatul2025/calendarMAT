@@ -41,7 +41,7 @@ const AGENT_SERVICIU_ID = 'AGENT_SERVICIU';
 const AGENT_SERVICIU_NAME = 'Diverse';
 const SERVICE_AGENTS = [ // Specified list used for rotation, NOT for the dropdown
   "Scarlat", "Cristina", "Dida", "Mihaela", "Catalina", "George", 
-  "Andreea", "Cosmina", "Florin", "Valentina P", "Larisa", "Voicu"
+  "Florin", "Valentina P", "Alin M", "Larisa", "Voicu"
 ]; // Removed .sort() to keep specific order
 
 const ASSIGNMENTS_COLLECTION = 'dailyAssignments';
